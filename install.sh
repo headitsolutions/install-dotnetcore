@@ -18,7 +18,7 @@ is_dotnet_core_7_installed() {
 install_dotnet_core_7() {
     wget https://dot.net/v1/dotnet-install.sh
     chmod +x dotnet-install.sh
-    ./dotnet-install.sh --version 7.0.0 # specify the exact version if you know it
+    ./dotnet-install.sh --channel 7.0 # specify the exact version if you know it
     echo 'export PATH="$PATH:$HOME/.dotnet"' >> ~/.bashrc # or ~/.bash_profile or ~/.zshrc
     source ~/.bashrc # or source ~/.bash_profile or source ~/.zshrc
 }
