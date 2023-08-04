@@ -53,6 +53,18 @@ else
     install_dotnet_core_7_sdk
 fi
 
+# Check and set the DOTNET_ROOT environment variable if it's not already set
+if [ -z "$DOTNET_ROOT" ]; then
+    echo 'export DOTNET_ROOT="$HOME/.dotnet"' >> ~/.bashrc
+    export DOTNET_ROOT="$HOME/.dotnet"
+fi
+
+# Check if the PATH already has the .NET executables and tools directory
+if [[ ":$PATH:" != *":$HOME/.dotnet:"* ]] || [[ ":$PATH:" != *":$HOME/.dotnet/tools:"* ]]; then
+    echo 'export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"' >> ~/.bashrc
+    export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"
+fi
+
 # Check if dotnet core 7 runtime is installed
 if is_dotnet_core_7_runtime_installed; then
     echo ".NET Core 7 runtime is already installed."
