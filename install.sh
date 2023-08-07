@@ -73,3 +73,6 @@ else
     echo "Installing .NET Core 7 runtime..."
     install_dotnet_core_7_runtime
 fi
+
+# Apply the changes made to ~/.bashrc immediately to the current session
+source ~/.bashrc
