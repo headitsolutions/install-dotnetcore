@@ -33,8 +33,6 @@ install_dotnet_core_7_sdk() {
     wget https://dot.net/v1/dotnet-install.sh
     chmod +x dotnet-install.sh
     ./dotnet-install.sh --channel 7.0
-    echo 'export PATH="$PATH:$HOME/.dotnet"' >> ~/.bashrc
-    source ~/.bashrc
 }
 
 # Function to install dotnet core 7 runtime
@@ -54,15 +52,12 @@ else
 fi
 
 # Check and set the DOTNET_ROOT environment variable if it's not already set
-if [ -z "$DOTNET_ROOT" ]; then
-    echo 'export DOTNET_ROOT="$HOME/.dotnet"' >> ~/.bashrc
-    export DOTNET_ROOT="$HOME/.dotnet"
+if [[ ":$PATH:" != *":$HOME/.dotnet:"* ]]; then
+    export PATH="$PATH:$HOME/.dotnet"
 fi
 
-# Check if the PATH already has the .NET executables and tools directory
-if [[ ":$PATH:" != *":$HOME/.dotnet:"* ]] || [[ ":$PATH:" != *":$HOME/.dotnet/tools:"* ]]; then
-    echo 'export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"' >> ~/.bashrc
-    export PATH="$PATH:$HOME/.dotnet:$HOME/.dotnet/tools"
+if [[ ":$PATH:" != *":$HOME/.dotnet/tools:"* ]]; then
+    export PATH="$PATH:$HOME/.dotnet/tools"
 fi
 
 # Check if dotnet core 7 runtime is installed
